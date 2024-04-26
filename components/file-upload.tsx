@@ -22,7 +22,10 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
       <div className="relative h-20 w-20">
         <Image fill src={value} alt="Upload" className="rounded-full" />
         <button
-            onClick={()=> onChange("")}
+            onClick={()=> (
+            onChange("")
+
+        )}
             className="bg-rose-500 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
             type="button"
         >
@@ -35,28 +38,26 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
   return (
     <UploadDropzone<OurFileRouter, typeof endpoint>
       endpoint={endpoint}
+
       onClientUploadComplete={(res) => {
         onChange(res?.[0].url);
       }}
+      
       onUploadError={(error: Error) => {
         console.log(error);
       }}
-      className="ut-label:text-indigo-500 ut-button:bg-indigo-500 cursor-pointer"
       content={{
-        button({ready, isUploading }) {
-            if (ready) return "Enviar"
-            if (isUploading) return "Enviando..."
-            return "Carregando..."
-        },
         label({ready, }) {
             if (ready) return "Selecione um arquivo ou arraste"
         },
-        allowedContent({ready, isUploading}){
+        allowedContent({ready}){
             if (ready) return "Tamanho max(4MB)"
-            if (isUploading) return "Enviando..."
-            return "Carregando..."
         }
       }}
+
+
+      className="ut-label:text-indigo-500 ut-button:bg-indigo-500 cursor-pointer"
+      
     />
   );
 };
