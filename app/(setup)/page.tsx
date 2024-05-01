@@ -1,8 +1,8 @@
-import React from 'react'
-import { initialProfile } from '@/lib/initial-profile'
-import { db } from '@/lib/db';
-import { redirect } from 'next/navigation';
-import InitialModal from '@/components/modals/initial-modal';
+import React from "react";
+import { initialProfile } from "@/lib/initial-profile";
+import { db } from "@/lib/db";
+import { redirect } from "next/navigation";
+import InitialModal from "@/components/modals/initial-modal";
 export default async function SetupPage() {
   const profile = await initialProfile();
 
@@ -10,17 +10,14 @@ export default async function SetupPage() {
     where: {
       members: {
         some: {
-          profileid: profile.id
-        }
-      }
-    }
-  })
+          profileid: profile.id,
+        },
+      },
+    },
+  });
 
-  if(server){
+  if (server) {
     redirect(`/servers/${server.id}`);
   }
-  return (
-    <InitialModal/>
-  )
+  return <InitialModal />;
 }
-

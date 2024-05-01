@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import axios from "axios"
+import axios from "axios";
 import {
   Dialog,
   DialogContent,
@@ -59,14 +59,14 @@ export default function CreateServerModal() {
       router.refresh();
       onClose();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   const handlerClose = () => {
     form.reset();
     onClose();
-  }
+  };
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handlerClose}>

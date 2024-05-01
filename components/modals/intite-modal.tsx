@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -17,11 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Check, Copy, RefreshCw } from "lucide-react";
 
-
-
-
 export default function InviteModal() {
-  const {onOpen, isOpen, onClose, type, data } = useModal();
+  const { onOpen, isOpen, onClose, type, data } = useModal();
   const origin = useOrigin();
 
   const isModalOpen = isOpen && type === "invite";
@@ -30,29 +27,30 @@ export default function InviteModal() {
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const onCopy = () =>{
+  const onCopy = () => {
     navigator.clipboard.writeText(inviteUrl);
     setCopied(true);
 
-    setTimeout(()=>{
-      setCopied(false)
-    }, 2000)
-  }
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
 
   const onNew = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.patch(`/api/servers/${server?.id}/invite-code`);
-      onOpen("invite", {server: response.data})
+      const response = await axios.patch(
+        `/api/servers/${server?.id}/invite-code`
+      );
+      onOpen("invite", { server: response.data });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
-  
-  const inviteUrl = `${origin}/invite/${server?.inviteCode}`
+  const inviteUrl = `${origin}/invite/${server?.inviteCode}`;
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -72,10 +70,17 @@ export default function InviteModal() {
               className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
               value={inviteUrl}
             />
-            <Button disabled={isLoading} onClick={onCopy} size="icon" className={copied ? "bg-green-300" : ""}>
-              {
-                copied ? <Check className="w-4 h-4"/> : <Copy className="w-4 h-4" />
-              }
+            <Button
+              disabled={isLoading}
+              onClick={onCopy}
+              size="icon"
+              className={copied ? "bg-green-300" : ""}
+            >
+              {copied ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <Copy className="w-4 h-4" />
+              )}
             </Button>
           </div>
           <Button
@@ -86,7 +91,7 @@ export default function InviteModal() {
             onClick={onNew}
           >
             Gerar um novo link
-            <RefreshCw className="w-4 h-4 ml-2"/>
+            <RefreshCw className="w-4 h-4 ml-2" />
           </Button>
         </div>
       </DialogContent>

@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import {
   Dialog,
   DialogContent,
@@ -59,7 +59,7 @@ export default function InitialModal() {
       router.refresh();
       window.location.reload();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
